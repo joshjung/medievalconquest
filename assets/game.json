@@ -59,8 +59,25 @@
       }
     }
   ],
+  "gameMethods": [
+    {"name": "lordCalcPopulationIncrease", "call": "lordCalcPopulationIncrease", "timeEstimate": 60},
+    {"name": "lordDrawCard", "call": "drawCardFor", "params": [0], "timeEstimate": 60},
+    {"name": "lordAdjustTaxes", "call": "lordAdjustTaxes", "timeEstimate": 30},
+    {"name": "toSheriff", "call": "changePlayer", "params": [1], "timeEstimate": 15},
+    {"name": "sheriffGatherTaxes"}
+  ],
+  "gameOrder":
+    [{"player": 0, 
+      "steps": ["lordCalcPopulationIncrease"]}]
   "players": [
-    {"name": "Lord"},
+    {"name": "Lord",
+      "cards": [
+        {"name": "Diplomatic Speech", 
+          "duration": 3,
+          "description": "Raise taxes to highest without offending happiness.",
+          "exemptions": [{"name": "lordCalcPopulationIncrease"}]
+        }
+      ]},
     {"name": "Sheriff"},
     {"name": "Minstrel"},
     {"name": "Bishop"},
