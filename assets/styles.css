@@ -1,0 +1,28 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+html{
+	background-color: gray;
+}
+
+.container {
+	background-color: white;
+	width: 980px;
+	margin: 0px auto;
+	margin-top: 50px;
+}
+
+.playerContainer {
+	width: 75%;
+	min-height: 500px;
+	border: 1px solid black;
+	border-radius: 3px;
+	margin: 5px;
+	display: none;
+}
+
+.activeDiv {
+	display: block;
+}
