@@ -7,22 +7,60 @@ html{
 	background-color: gray;
 }
 
+/*Containers*/
+
 .container {
-	background-color: white;
 	width: 980px;
 	margin: 0px auto;
 	margin-top: 50px;
 }
 
 .playerContainer {
-	width: 75%;
+
+	float: left;
+	background-color: white;
+	width: 60%;
+	max-width: 60%;
 	min-height: 500px;
 	border: 1px solid black;
-	border-radius: 3px;
+	border-radius: 5px;
 	margin: 5px;
 	display: none;
 }
 
 .activeDiv {
 	display: block;
+}
+
+.fortuneCardContainer {
+	float: left;
+	background-color: white;
+	width: 30%;
+	max-width: 30%;
+	min-height: 200px;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 5px;
+
+}
+
+.statisticsContainer {
+	float: left;
+	background-color: white;
+	width: 30%;
+	max-width: 30%;
+	min-height: 288px;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+/* End of Containers*/
+
+
+/*Players*/
+
+.playerTitle {
+	font-size: 30px;
+	text-align: center;
 }
