@@ -10,7 +10,7 @@
         "food": 5,
         "population": 200,
         "castles": 1,
-        "farms", 1
+        "farms": 1
       },
       "rules": {
         "taxes": [
@@ -44,14 +44,14 @@
           {"name": "None", "value": -2},
           {"name": "Weak", "value": -1},
           {"name": "Normal", "value": 0},
-          {"name": "Secure", "value": +1}],
+          {"name": "Secure", "value": 1}],
         "rations": [
           {"name": "None", "value": -2},
           {"name": "Half", "value": -1},
           {"name": "Normal", "value": 0},
-          {"name": "Double", "value": +1}],
+          {"name": "Double", "value": 1}],
         "labor": [
-          {"name": "Leniant", "value": +1},
+          {"name": "Leniant", "value": 1},
           {"name": "Normal", "value": 0},
           {"name": "Harsh", "value": -1},
           {"name": "Tyrant", "value": -2}
@@ -60,11 +60,11 @@
     }
   ],
   "players": [
-    {name: "Lord"},
-    {name: "Sheriff"},
-    {name: "Minstrel"},
-    {name: "Bishop"},
-    {name: "Reeve"},
-    {name: "Clerk"},
+    {"name": "Lord"},
+    {"name": "Sheriff"},
+    {"name": "Minstrel"},
+    {"name": "Bishop"},
+    {"name": "Reeve"},
+    {"name": "Clerk"},
   ]
 }
