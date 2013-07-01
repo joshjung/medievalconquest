@@ -1,0 +1,70 @@
+{
+  "gameName": "Medieval Conquest",
+  "version": "1.0",
+  "settings": [
+    {"name": "Game Settings 1",
+      "start": {
+        "gold": 10,
+        "wood": 5,
+        "stone": 5,
+        "food": 5,
+        "population": 200,
+        "castles": 1,
+        "farms", 1
+      },
+      "rules": {
+        "taxes": [
+          {"name": "none", "value": 1},
+          {"name": "normal", "value": 2, "isDefault": true},
+          {"name": "high", "value": 3},
+          {"name": "cruel", "value": 4}],
+        "health": [
+          {"name": "Dying", "value": -20},
+          {"name": "2", "value": -10},
+          {"name": "3", "value": -5},
+          {"name": "4", "value": 0},
+          {"name": "5", "value": 0},
+          {"name": "6", "value": 0},
+          {"name": "7", "value": 5},
+          {"name": "8", "value": 10},
+          {"name": "9", "value": 15},
+          {"name": "Perfect", "value": 20}],
+        "happiness": [
+          {"name": "Miserable", "value": -20},
+          {"name": "2", "value": -10},
+          {"name": "3", "value": -5},
+          {"name": "4", "value": 0},
+          {"name": "5", "value": 0},
+          {"name": "6", "value": 0},
+          {"name": "7", "value": 5},
+          {"name": "8", "value": 10},
+          {"name": "9", "value": 15},
+          {"name": "Perfect", "value": 20}],
+        "security": [
+          {"name": "None", "value": -2},
+          {"name": "Weak", "value": -1},
+          {"name": "Normal", "value": 0},
+          {"name": "Secure", "value": +1}],
+        "rations": [
+          {"name": "None", "value": -2},
+          {"name": "Half", "value": -1},
+          {"name": "Normal", "value": 0},
+          {"name": "Double", "value": +1}],
+        "labor": [
+          {"name": "Leniant", "value": +1},
+          {"name": "Normal", "value": 0},
+          {"name": "Harsh", "value": -1},
+          {"name": "Tyrant", "value": -2}
+        ]
+      }
+    }
+  ],
+  "players": [
+    {name: "Lord"},
+    {name: "Sheriff"},
+    {name: "Minstrel"},
+    {name: "Bishop"},
+    {name: "Reeve"},
+    {name: "Clerk"},
+  ]
+}
