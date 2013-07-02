@@ -68,7 +68,7 @@
   ],
   "gameOrder":
     [{"player": 0, 
-      "steps": ["lordCalcPopulationIncrease"]}]
+      "steps": ["lordCalcPopulationIncrease"]}],
   "players": [
     {"name": "Lord",
       "cards": [
