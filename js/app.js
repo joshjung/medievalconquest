@@ -1,13 +1,15 @@
 requirejs.config({
     "baseUrl": "js/lib",
     "paths": {
-      "app": "../app"
-    },
-    "shim": {
-        "jquery.alpha": ["jquery"],
-        "jquery.beta": ["jquery"]
+      "main": "../app/main",
+      "jquery" : "jquery",
+      "game" : "game",
+      "clock" : "clock",
+      "bindingUtil" : "bindingUtil",
+      "eventDispatcher" : "eventDispatcher"
     }
+    
 });
 
 // Load the main app module to start the app
-requirejs(["app/main"]);
+require(["main"]);
