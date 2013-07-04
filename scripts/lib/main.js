@@ -5,13 +5,6 @@
 	// initialize variables
 	var currentTurn = 0, data;
 
-
-
-
-
-
-
-
 	// game logic
 
 	var init = function() {
