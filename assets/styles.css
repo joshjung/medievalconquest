@@ -4,7 +4,8 @@
 }
 
 html{
-	background-color: gray;
+	/*background-image: url(/assets/bg1.jpg);*/
+	background-size: cover;
 }
 
 /*Containers*/
@@ -16,9 +17,8 @@ html{
 }
 
 .playerContainer {
-
 	float: left;
-	background-color: white;
+	background-color: rgba(255,100,0,.8);
 	width: 60%;
 	max-width: 60%;
 	min-height: 500px;
@@ -34,7 +34,7 @@ html{
 
 .fortuneCardContainer {
 	float: left;
-	background-color: white;
+	background-color: rgba(255,0,100,.8);
 	width: 30%;
 	max-width: 30%;
 	min-height: 200px;
@@ -46,7 +46,7 @@ html{
 
 .statisticsContainer {
 	float: left;
-	background-color: white;
+	background-color: rgba(0,100,255,.8);
 	width: 30%;
 	max-width: 30%;
 	min-height: 288px;
