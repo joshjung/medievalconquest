@@ -64,3 +64,11 @@ html{
 	font-size: 30px;
 	text-align: center;
 }
+
+.colorBox {
+	width: 75px;
+	height: 75px;
+	margin: 3px;
+	background-color: blue;
+	float: left;
+}
