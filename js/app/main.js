@@ -1,6 +1,6 @@
-define(["jquery", "bindingUtil", "clock", "eventDispatcher", "toggleButton"],
-function($, bindingUtil, Clock, eventDispatcher)
+define(["jquery", "bindingUtil", "clock", "toggleButton"],
+function($, BindingUtil, Clock, ToggleButton)
 {
-	bindingUtil.respond(".clock", [new Clock(), "displayDigital"]);
-	bindingUtil.respond("#toggleButton", new ToggleButton());
+	BindingUtil.respond(".clock", [new Clock(), "displayDigital"]);
+	BindingUtil.respond("#toggleButton", new ToggleButton());
 });

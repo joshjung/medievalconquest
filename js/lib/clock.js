@@ -4,7 +4,6 @@ define(["eventDispatcher"], function(eventDispatcher) {
 
 		var that = this;
 		that.timer = setInterval(function() {
-			console.log("dispatching updateClock");
 			that.dispatchEvent(new Event("updateClock"));
 		}, 1000);
 	}

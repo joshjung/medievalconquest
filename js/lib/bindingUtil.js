@@ -13,9 +13,7 @@ define([], function() {
 
 			var obj;
 			var responder;
-			var type = typeof responderReference;
-
-			if (type == "array") {
+			if (Object.prototype.toString.call(responderReference) === '[object Array]') {
 				if (responderReference.length != 2)
 					throw "responder array must be formatted as [object, responderClassName]: " + array;
 
@@ -24,7 +22,7 @@ define([], function() {
 
 				obj = responderReference[0];
 				responder = obj["$" + responderReference[1]];
-			} else if (type == "object") {
+			} else {
 				obj = responderReference;
 
 				if (!obj.hasOwnProperty("$defaultResponder"))
@@ -40,9 +38,7 @@ define([], function() {
 
 			var responderFunction = function(event) {
 				$(className).each(function() {
-					responder[responder.length - 1]($(this), function() {
-						console.log("done!");
-					});
+					responder[responder.length - 1]($(this), function() {});
 				});
 			}
 

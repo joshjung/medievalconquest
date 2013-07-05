@@ -3,6 +3,8 @@ define(["eventDispatcher", "bindingUtil"], function(eventDispatcher, bindingUtil
 		this.selected = false;
 		this.selectedText = "Selected";
 		this.deselectedText = "Deselected";
+		this.$defaultResponder = this.$updateDisplay;
+
 		this.dispatchEvent(new Event("initialize"));
 	}
 
@@ -13,7 +15,7 @@ define(["eventDispatcher", "bindingUtil"], function(eventDispatcher, bindingUtil
 		this.selected = !this.selected;
 	}
 
-	ToggleButton.prototype.$updateDisplay = ToggleButton.prototype.$defaultResponder = [
+	ToggleButton.prototype.$updateDisplay = [
 		"selectedChanged", "initialize",
 		function(element, callback) {
 			element.html(this.selected ? this.selectedText : this.deselectedText);
