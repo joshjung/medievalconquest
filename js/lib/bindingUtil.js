@@ -14,6 +14,10 @@ define([], function() {
 			var obj;
 			var responder;
 
+			var objects;
+			var responders;
+			var elements;
+
 			if (Object.prototype.toString.call(responderReference) === '[object Array]') {
 				if (responderReference.length != 2)
 					throw "responder array must be formatted as [object, responderClassName]: " + array;
@@ -21,12 +25,27 @@ define([], function() {
 				if (responderReference[0] === undefined)
 					throw "first element of responder reference needs to be non-null";
 
-				obj = responderReference[0];
-				responder = obj["$" + responderReference[1]];
+				if (typeof responderReference[0] === "function") {
+					
+					$(className).each(function() {
+						objects.push(responderReference[0]());
+						responders.push(objects[objects.length-1]["$" + responderReference[1]])
+						elements.push($(this));
+					});
+
+					for (var i in objects) {
+
+						//TO DO: add eventListeners for each element to the relative objects.
+
+					}
+
+				} else {
+ 
+					obj = responderReference[0];
+					responder = obj["$" + responderReference[1]];
+				}
 			} 
-			else if (typeof responderReference === "function"){
-				
-			}
+			
 			else {
 				obj = responderReference;
 
