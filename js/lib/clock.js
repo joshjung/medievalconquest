@@ -1,33 +1,31 @@
-define(["eventDispatcher"], function(eventDispatcher)
-{
-	var Clock = function()
-	{
-		this.prototype = new eventDispatcher();
+define(["eventDispatcher"], function(eventDispatcher) {
+	var Clock = function() {
+		this.mode = 0;
 
-		this.prototype.dispatch = function()
-		{
+		var that = this;
+		that.timer = setInterval(function() {
 			console.log("dispatching updateClock");
-			this.dispatchEvent(new Event("updateClock"));
-		};
-
-		this.prototype.init = function()
-		{
-			this.timer = setInterval(this.dispatch, 1000);
-		};
-		
-		this.prototype.$displayDigital = ["updateDigital", "updateClock", function(element, callback) {
-			
-			var date = new Date();
-			element.html(date.getHours() + ":" + date.getMinutes() + "." + date.getSeconds());
-			
-			callback();
-		}];
-
-		this.prototype.$displayAnalog = ["updateAnalog", "updateClock", function(element, callback) {
-			callback();
-		}];
+			that.dispatchEvent(new Event("updateClock"));
+		}, 1000);
 	}
 
-	return Clock;
+	Clock.prototype = new eventDispatcher();
 
+	Clock.prototype.$displayDigital = ["updateDigital", "updateClock", "updateMode",
+		function(element, callback) {
+			var that = this;
+			var date = new Date();
+			element.html(date.getHours() + ":" + date.getMinutes() + (that.mode == 1 ? "." + date.getSeconds() : ""));
+
+			callback();
+		}
+	];
+
+	Clock.prototype.$displayAnalog = ["updateAnalog", "updateClock", "updateMode",
+		function(element, callback) {
+			callback();
+		}
+	];
+
+	return Clock;
 });
