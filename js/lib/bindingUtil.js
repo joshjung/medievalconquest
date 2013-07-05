@@ -6,7 +6,7 @@ define([], function() {
 			console.log("initializing bindingUtil");
 		},
 
-		respond: function(className, responderReference) {
+		bind: function(className, responderReference) {
 
 			if (typeof className != "string")
 				throw "className isn't a string: " + className;
@@ -25,7 +25,7 @@ define([], function() {
 			} else {
 				obj = responderReference;
 
-				if (!obj.hasOwnProperty("$defaultResponder"))
+				if (!obj.__proto__.hasOwnProperty("$defaultResponder"))
 					throw "A responder that is a standard Object needs to have a property $defaultResponder.";
 
 				responder = obj.$defaultResponder;
@@ -37,9 +37,7 @@ define([], function() {
 			var events = responder.slice(0, responder.length - 1);
 
 			var responderFunction = function(event) {
-				$(className).each(function() {
-					responder[responder.length - 1]($(this), function() {});
-				});
+				responder[responder.length - 1].call(obj, $(className), function() {});
 			}
 
 			for (var i in events) {
@@ -47,6 +45,7 @@ define([], function() {
 				obj.addEventListener(events[i], responderFunction);
 			}
 
+			obj.dispatchEvent(new Event("renderBindComplete"));
 		}
 	}
 

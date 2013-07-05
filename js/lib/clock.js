@@ -11,10 +11,9 @@ define(["eventDispatcher"], function(eventDispatcher) {
 	Clock.prototype = new eventDispatcher();
 
 	Clock.prototype.$displayDigital = ["updateDigital", "updateClock", "updateMode",
-		function(element, callback) {
-			var that = this;
+		function(elements, callback) {
 			var date = new Date();
-			element.html(date.getHours() + ":" + date.getMinutes() + (that.mode == 1 ? "." + date.getSeconds() : ""));
+			elements.html(date.getHours() + ":" + date.getMinutes() + (this.mode == 1 ? "." + date.getSeconds() : ""));
 
 			callback();
 		}
