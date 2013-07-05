@@ -13,6 +13,7 @@ define([], function() {
 
 			var obj;
 			var responder;
+
 			if (Object.prototype.toString.call(responderReference) === '[object Array]') {
 				if (responderReference.length != 2)
 					throw "responder array must be formatted as [object, responderClassName]: " + array;
@@ -22,7 +23,11 @@ define([], function() {
 
 				obj = responderReference[0];
 				responder = obj["$" + responderReference[1]];
-			} else {
+			} 
+			else if (typeof responderReference === "function"){
+				
+			}
+			else {
 				obj = responderReference;
 
 				if (!obj.__proto__.hasOwnProperty("$defaultResponder"))
