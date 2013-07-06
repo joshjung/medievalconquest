@@ -1,78 +1,64 @@
 define([], function() {
-	var bindingUtil = {
-		classToResponderMap: {},
+	var BindingUtil = function() {
+		this.classToResponderMap = {};
+	}
 
-		init: function() {
-			console.log("initializing bindingUtil");
-		},
+	BindingUtil.prototype._bind = function(jqueryObj, target, targetResponder) {
+		var events = targetResponder.slice(0, targetResponder.length - 1);
 
-		bind: function(className, responderReference) {
+		var responderFunction = function(event) {
+			targetResponder[targetResponder.length - 1].call(target, jqueryObj, function() {});
+		}
 
-			if (typeof className != "string")
-				throw "className isn't a string: " + className;
+		for (var i in events) {
+			console.log("+Responder: " + jqueryObj.val() + " -> " + events[i]);
+			target.addEventListener(events[i], responderFunction);
+		}
 
-			var obj;
-			var responder;
+		target.dispatchEvent(new Event("renderBindComplete"));
+	};
 
-			var objects;
-			var responders;
-			var elements;
+	BindingUtil.prototype.bind = function(selector, responderReference) {
 
-			if (Object.prototype.toString.call(responderReference) === '[object Array]') {
-				if (responderReference.length != 2)
-					throw "responder array must be formatted as [object, responderClassName]: " + array;
+		if (typeof selector != "string")
+			throw "selector isn't a string: " + selector;
 
-				if (responderReference[0] === undefined)
-					throw "first element of responder reference needs to be non-null";
+		var obj;
+		var responder;
+		var useDefaultResponder;
 
-				if (typeof responderReference[0] === "function") {
-					
-					$(className).each(function() {
-						objects.push(responderReference[0]());
-						responders.push(objects[objects.length-1]["$" + responderReference[1]])
-						elements.push($(this));
-					});
+		if (Object.prototype.toString.call(responderReference) === '[object Array]') {
+			if (responderReference.length != 2)
+				throw "responder array must be formatted as [object, responderClassName]: " + array;
 
-					for (var i in objects) {
+			if (responderReference[0] === undefined)
+				throw "first element of responder reference needs to be an instance of an object or a function (to use as a factory).";
 
-						//TO DO: add eventListeners for each element to the relative objects.
+			obj = responderReference[0];
 
-					}
+			useDefaultResponder = false;
+		} else {
+			obj = responderReference;
 
-				} else {
- 
-					obj = responderReference[0];
-					responder = obj["$" + responderReference[1]];
-				}
-			} 
-			
-			else {
-				obj = responderReference;
+			useDefaultResponder = true;
+		}
 
-				if (!obj.__proto__.hasOwnProperty("$defaultResponder"))
-					throw "A responder that is a standard Object needs to have a property $defaultResponder.";
+		var that = this;
+		$(selector).each(function(index, para) {
+			var target = (typeof obj == "function") ? obj() : obj;
 
-				responder = obj.$defaultResponder;
-			}
+			if (!target.__proto__.hasOwnProperty("$defaultResponder"))
+				throw "A responder that is a standard Object needs to have a property $defaultResponder.";
+
+			responder = useDefaultResponder ? target.$defaultResponder : target["$" + responderReference[1]];
 
 			if (responder.length < 2)
 				throw "The responder " + responder + " needs at least one event and a final function.";
 
-			var events = responder.slice(0, responder.length - 1);
+			that._bind($(para), target, responder);
+		});
+	};
 
-			var responderFunction = function(event) {
-				responder[responder.length - 1].call(obj, $(className), function() {});
-			}
-
-			for (var i in events) {
-				console.log("+Responder: " + className + " -> " + events[i]);
-				obj.addEventListener(events[i], responderFunction);
-			}
-
-			obj.dispatchEvent(new Event("renderBindComplete"));
-		}
-	}
-
-	return bindingUtil;
+	return new BindingUtil();
 
 });

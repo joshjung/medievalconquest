@@ -1,7 +1,5 @@
-define(["jquery", "bindingUtil", "clock", "toggleButton"],
-function($, BindingUtil, Clock, ToggleButton)
-{
-	
-	BindingUtil.respond(".colorBox", [function() {return new colorBox();}, "changeColor" ]);
-
+define(["jquery", "bindingUtil", "monochromeSwitcher"], function($, BindingUtil, MonochromeSwitcher) {
+	BindingUtil.bind(".colorBox", function() {
+		return new MonochromeSwitcher();
+	});
 });
