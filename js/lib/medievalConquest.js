@@ -12,6 +12,7 @@ define(["jquery", "eventDispatcher", "jsonLoader", "stateController"], function 
 		new JSONLoader("assets/game.json").load(function(data) {
 			that.data = data;
 			that.stateController.addSequences(that.data.gameSequences);
+			that.stateController.run("medievalConquest");
 		});
 	};
 
