@@ -1,16 +1,54 @@
 define(["eventDispatcher"], function (EventDispatcher) {
-	var StateController = function ()
+	var StateController = function (target)
 	{
-		this.Thread = function ()
+		this.target = target;
+
+		this.Thread = function (id, callback, sequence, stateController)
 		{
-			this.id = "";
-			this.index = 0;
-			this.sequence = null;
+			// The thread's id. Each thread ever created should have a unique one.
+			this.id = id;
+			// The current index of the currently running element.
+			this.curSequenceIx = 0;
+			// The sequence this thread is running.
+			this.sequence = sequence;
+			// The function to call when this thread is done executing.
+			this.callback = callback;
+
+			this.stateControllerParent = stateController;
+
+			this.curElement = sequence[curSequenceIx];
 		}
 
 		this.Thread.prototype.next = function()
 		{
+			this.curSequenceIx++;
+
+			if (this.curSequenceIx == sequence.length)
+			{
+				// We are done with this sequence, so tell whoever is listening to us
+				// that we are done.
+				this.callback();
+				return;
+			}
+
+			this.curElement = sequence[curSequenceIx];
+
+			// Trigger another sequence
+			if (typeof this.curElement == "string")
+			{
+				var thread = new Thread(this.stateControllerParent.id, this.next, stateController.getSequenceByName(this.curElement), stateControllerParent);
+
+				thread.next();
+
+				return;
+			}
 			
+			if (this.curElement.hasOwnProperty("call"))
+			{
+				var func = this.stateControllerParent.target[this.curElement["call"]];
+				var params = this.curElement.hasOwnProperty("params") ? this.curElement["params"] : null;
+				func.apply(this.target, [this.next].concat(params));
+			}
 		}
 
 		this.lastID = 0;
@@ -21,6 +59,12 @@ define(["eventDispatcher"], function (EventDispatcher) {
 	};
 
 	StateController.prototype = new EventDispatcher();
+
+	StateController.prototype.getSequenceByName = function(name)
+	{
+		if (this.nameToSequenceMap[name] === undefined)
+			throw "Could not find a sequence with the specified name.";
+	}
 
 	/** =====================================================================
 	 * A sequence is:
@@ -46,8 +90,8 @@ define(["eventDispatcher"], function (EventDispatcher) {
 		for (var i = 0; i < sequencesArray.length;i++)
 		{
 			var sequenceObj = sequencesArray[i];
-			var name = sequenceObj[0];
-			var element = sequenceObj[1];
+			var name = sequenceObj.name;
+			var element = sequenceObj.sequence;
 
 			if (this.nameToSequenceMap[name] !== undefined)
 			{
@@ -75,4 +119,6 @@ define(["eventDispatcher"], function (EventDispatcher) {
 		thread.sequence = sequence;
 
 	}
+
+	return StateController;
 });

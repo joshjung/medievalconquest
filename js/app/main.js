@@ -1,6 +1,5 @@
-define(["jquery", "bindingUtil", "clock", "toggleButton"],
-function($, BindingUtil, Clock, ToggleButton)
-{
-	BindingUtil.bind(".clock", [new Clock(), "displayDigital"]);
-	BindingUtil.bind("#toggleButton", new ToggleButton());
+define(["medievalConquest"], function(MedievalConquest) {
+	var medievalConquest = new MedievalConquest();
+	medievalConquest.run();
+	return medievalConquest;
 });

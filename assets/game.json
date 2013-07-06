@@ -59,12 +59,60 @@
       }
     }
   ],
-  "gameMethods": [
-    {"name": "lordCalcPopulationIncrease", "call": "lordCalcPopulationIncrease", "timeEstimate": 60},
-    {"name": "lordDrawCard", "call": "drawCardFor", "params": [0], "timeEstimate": 60},
-    {"name": "lordAdjustTaxes", "call": "lordAdjustTaxes", "timeEstimate": 30},
-    {"name": "toSheriff", "call": "changePlayer", "params": [1], "timeEstimate": 15},
-    {"name": "sheriffGatherTaxes"}
+  "gameSequences": [
+    {
+      "name": "medievalConquest",
+      "sequence": 
+        ["gameStart", "gameTurns", "gameEnd"]
+    },
+    {
+      "name": "gameStart",
+      "sequence":
+        [{"call": "gameStart"}]
+    },
+    {
+      "name": "gameTurns",
+      "sequence":
+        ["lordTurn", "sheriffTurn", "bishopTurn", "minstrelTurn", "clerkTurn", "reeveTurn", "gameTurns"]
+    },
+    {
+      "name": "gameEnd",
+      "sequence": 
+        {"call": "gameEnd"}
+    },
+    {
+      "name": "lordTurn",
+      "sequence": 
+        [{"call": "changePlayer", "params": [0], "timeEstimate": 15},
+        {"call": "lordCalcPopulationIncrease", "timeEstimate": 60},
+        {"call": "drawCardFor", "params": [0], "timeEstimate": 60},
+        {"call": "lordAdjustTaxes", "timeEstimate": 30}]
+    },
+    {
+      "name": "sheriffTurn",
+      "sequence":
+        [{"name": "sheriffCalc"}]
+    },
+    {
+      "name": "bishopTurn",
+      "sequence":
+        [{"name": "bishopCalc"}]
+    },
+    {
+      "name": "minstrelTurn",
+      "sequence":
+        [{"name": "minstrelCalc"}]
+    },
+    {
+      "name": "clerkTurn",
+      "sequence":
+        [{"name": "clerkCalc"}]
+    },
+    {
+      "name": "reeveTurn",
+      "sequence":
+        [{"name": "reeveCalc"}]
+    }
   ],
   "gameOrder":
     [{"player": 0, 
@@ -82,6 +130,6 @@
     {"name": "Minstrel"},
     {"name": "Bishop"},
     {"name": "Reeve"},
-    {"name": "Clerk"},
+    {"name": "Clerk"}
   ]
 }
